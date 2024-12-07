@@ -8,6 +8,7 @@
 #include "main.h"
 #include "softwareTimer.h"
 #include <stdio.h>
+#include <string.h>
 
 #ifndef INC_GLOBAL_H_
 #define INC_GLOBAL_H_

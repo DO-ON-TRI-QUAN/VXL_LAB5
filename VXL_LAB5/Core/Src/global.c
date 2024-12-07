@@ -28,7 +28,7 @@ UART_HandleTypeDef huart2;
 
 void ADC_Transmit() {
 	ADC_value = HAL_ADC_GetValue(&hadc1);
-	int len = sprintf(str, "!ADC=%ld#\r\n", ADC_value);
-	HAL_UART_Transmit(&huart2 , (uint8_t*) str, len, 1000) ;
+	sprintf(str, "!ADC=%ld#\r\n", ADC_value);
+	HAL_UART_Transmit(&huart2 , (uint8_t*) str, strlen(str), 1000);
 	setTimer(0, 3000);
 }
