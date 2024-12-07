@@ -9,36 +9,36 @@
 #include "softwareTimer.h"
 #include <string.h>
 
-void uart_communication_fsm()
-{
+
+void uart_communication_fsm() {
 	switch (status_uart) {
 
 		case CMD_WAIT:
-			HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, 1);
+			HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, 0);
 
 			if (cmd_flag == 1 ) {
 			    cmd_flag = 0;
 
 				if (strcmp(cmd_data, "RST") == 0 ) {
 				    status_uart = CMD_PROCESS;
-				    ADC_transmit();
+				    ADC_Transmit();
 				}
 			}
 
 			break;
 
 		case CMD_PROCESS:
-			HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, 0);
+			HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, 1);
 
 			if (timer_flag[0] == 1) {
-				ADC_transmit();
+				ADC_Transmit();
 			}
 
 			if (cmd_flag == 1) {
 				cmd_flag = 0;
 
 				if (strcmp(cmd_data, "RST") == 0 ) {
-					ADC_transmit();
+					ADC_Transmit();
 				}
 
 				if (strcmp(cmd_data, "OK") == 0 ) {
@@ -49,3 +49,4 @@ void uart_communication_fsm()
 			break;
 	}
 }
+

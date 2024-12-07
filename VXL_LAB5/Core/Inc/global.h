@@ -7,6 +7,7 @@
 
 #include "main.h"
 #include "softwareTimer.h"
+#include <stdio.h>
 
 #ifndef INC_GLOBAL_H_
 #define INC_GLOBAL_H_
@@ -25,15 +26,18 @@ extern uint8_t index_buffer;
 extern uint8_t buffer_flag;
 
 extern int cmd_flag;
-extern uint8_t cmd_data[MAX_SIZE_BUFFER];
-extern uint8_t cmd_index;
+extern char cmd_data[MAX_SIZE_BUFFER];
+extern int cmd_index;
 
 
 extern int status_parser;
 extern int status_uart;
 
-extern uint8_t ADC_value;;
+extern uint32_t ADC_value;;
 extern char str[16];
+
+extern ADC_HandleTypeDef hadc1;
+extern UART_HandleTypeDef huart2;
 
 void ADC_Transmit();
 

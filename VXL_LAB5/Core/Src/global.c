@@ -13,13 +13,22 @@ uint8_t index_buffer = 0;
 uint8_t buffer_flag = 0;
 
 int cmd_flag = 0;
-uint8_t cmd_data[MAX_SIZE_BUFFER];
-uint8_t cmd_index = 0;
+char cmd_data[MAX_SIZE_BUFFER];
+int cmd_index = 0;
 
-int status_parser = 0;
-int status_uart = 10;
+int status_parser = UART_WAIT;
+int status_uart = CMD_WAIT;
 
-uint8_t ADC_value = 0;
+uint32_t ADC_value = 0;
 char str[16];
 
+ADC_HandleTypeDef hadc1;
+UART_HandleTypeDef huart2;
 
+
+void ADC_Transmit() {
+	ADC_value = HAL_ADC_GetValue(&hadc1);
+	int len = sprintf(str, "!ADC=%ld#\r\n", ADC_value);
+	HAL_UART_Transmit(&huart2 , (uint8_t*) str, len, 1000) ;
+	setTimer(0, 3000);
+}

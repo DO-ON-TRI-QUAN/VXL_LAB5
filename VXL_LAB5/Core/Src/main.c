@@ -77,12 +77,13 @@ void HAL_UART_RxCpltCallback (UART_HandleTypeDef * huart) {
 	}
 }
 
+/*
 void ADC_transmit() {
 	ADC_value = HAL_ADC_GetValue(&hadc1);
-	sprintf(str, "!ADC=%u#\r\n", ADC_value);
-	HAL_UART_Transmit(&huart2 , (uint8_t*) str, strlen(str), 1000) ;
+	int len = sprintf(str, "!ADC=%ld#\r\n", ADC_value);
+	HAL_UART_Transmit(&huart2 , (uint8_t*) str, len, 1000) ;
 	setTimer(0, 3000);
-}
+}*/
 
 /* USER CODE END 0 */
 
@@ -118,9 +119,9 @@ int main(void)
   MX_USART2_UART_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
+  HAL_TIM_Base_Start_IT(&htim2);
   HAL_ADC_Start(&hadc1);
   HAL_UART_Receive_IT(&huart2, &temp, 1);
-
 
   /* USER CODE END 2 */
 
@@ -334,7 +335,9 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
+	timer_run();
+}
 /* USER CODE END 4 */
 
 /**

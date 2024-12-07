@@ -9,7 +9,7 @@
 
 void clearBuffer() {
    	for (int i = 0; i < MAX_SIZE_BUFFER; i++) {
-		buffer[i] = '\0';
+		buffer[i] = 0;
 	}
 
 	index_buffer = 0;
@@ -17,7 +17,7 @@ void clearBuffer() {
 
 void clearCMDdata() {
 	for (int i = 0; i < MAX_SIZE_BUFFER; i++) {
-		cmd_data[i] = '\0';
+		cmd_data[i] = 0;
 	}
 
 	cmd_index = 0;
@@ -36,10 +36,9 @@ void command_parser_fsm(){
 
 		case UART_RECEIVE:
 			if (buffer[index_buffer - 1] == '#') {
-				cmd_data[cmd_index] = '\0';
+				cmd_data[cmd_index] = 0;
 				status_parser = UART_WAIT;
 				cmd_flag = 1;
-
 			} else {
 				cmd_data[cmd_index++] = buffer[index_buffer - 1];
 			}
