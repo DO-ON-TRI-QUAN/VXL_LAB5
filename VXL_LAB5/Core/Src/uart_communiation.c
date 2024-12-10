@@ -16,7 +16,7 @@ void uart_communication_fsm() {
 		case CMD_WAIT:
 			HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, 1);
 
-			if (cmd_flag == 1 ) {
+			if (cmd_flag == 1 ) { // A new character is added to the buffer
 			    cmd_flag = 0;
 
 				if (strcmp(cmd_data, "RST") == 0 ) {
