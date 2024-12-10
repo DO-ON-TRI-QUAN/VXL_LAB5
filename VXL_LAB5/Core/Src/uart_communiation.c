@@ -14,7 +14,7 @@ void uart_communication_fsm() {
 	switch (status_uart) {
 
 		case CMD_WAIT:
-			HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, 0);
+			HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, 1);
 
 			if (cmd_flag == 1 ) {
 			    cmd_flag = 0;
@@ -28,7 +28,7 @@ void uart_communication_fsm() {
 			break;
 
 		case CMD_PROCESS:
-			HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, 1);
+			HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, 0);
 
 			if (timer_flag[0] == 1) {
 				ADC_Transmit();

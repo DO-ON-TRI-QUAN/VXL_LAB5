@@ -70,9 +70,15 @@ static void MX_TIM2_Init(void);
 
 void HAL_UART_RxCpltCallback (UART_HandleTypeDef * huart) {
 	if (huart -> Instance == USART2) {
+
+		HAL_UART_Transmit(&huart2, &temp, 1, 100); // This line is used for typing commands into the virtual terminal
+
 		buffer[index_buffer++] = temp;
+
 		if (index_buffer >= MAX_SIZE_BUFFER) index_buffer = 0;
+
 		buffer_flag = 1;
+
 		HAL_UART_Receive_IT(&huart2, &temp, 1);
 	}
 }
@@ -127,6 +133,10 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  char InitMessage[64];
+  int len = sprintf(InitMessage, "Begin Communication...\r\n");
+  HAL_UART_Transmit(&huart2, (void *)InitMessage, len, 100);
+
   while (1)
   {
 	  if (buffer_flag == 1) {
