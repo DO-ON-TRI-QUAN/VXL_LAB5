@@ -38,9 +38,9 @@ void command_parser_fsm(){
 			if (buffer[index_buffer - 1] == '#') {
 				cmd_data[cmd_index] = 0;
 				status_parser = UART_WAIT;
-				cmd_flag = 1;
+				cmd_flag = 1; // Complete command is parsed for uart communication
 			} else {
-				cmd_data[cmd_index++] = buffer[index_buffer - 1];
+				cmd_data[cmd_index++] = buffer[index_buffer - 1]; // Else add buffer characters into cmd_data buffer
 			}
 
 			break;
