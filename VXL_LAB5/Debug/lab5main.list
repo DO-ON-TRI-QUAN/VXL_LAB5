@@ -1667,7 +1667,7 @@ void uart_communication_fsm() {
  800097c:	2120      	movs	r1, #32
  800097e:	4822      	ldr	r0, [pc, #136]	; (8000a08 <uart_communication_fsm+0xa0>)
  8000980:	f000 ff36 	bl	80017f0 <HAL_GPIO_WritePin>
-			if (cmd_flag == 1 ) { // A new character is added to the buffer
+			if (cmd_flag == 1 ) {
  8000984:	4b21      	ldr	r3, [pc, #132]	; (8000a0c <uart_communication_fsm+0xa4>)
  8000986:	681b      	ldr	r3, [r3, #0]
  8000988:	2b01      	cmp	r3, #1
